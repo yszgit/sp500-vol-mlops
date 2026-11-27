@@ -1,16 +1,8 @@
 ## What changed
-<!-- One or two sentences. Link the issue/task if there is one. -->
+<!-- One or two sentences -->
 
 ## Why
-<!-- The problem this solves or the rubric item it covers. -->
+<!-- The problem this solves -->
 
 ## How it was tested
-<!-- Commands you ran and what you checked, e.g. "pytest -k api", "docker compose up, submitted the form". -->
-- [ ] `ruff check .` and `ruff format --check .` pass
-- [ ] `pytest` passes
-- [ ] Manual check:
-
-## Checklist
-- [ ] No secrets, `.env` files or CRSP data committed
-- [ ] README / architecture diagram updated if the architecture changed
-- [ ] Reviewer: please leave at least one real comment (not just Approve)
+<!-- Commands you ran or what you checked -->
