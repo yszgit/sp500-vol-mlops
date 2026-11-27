@@ -1,0 +1,29 @@
+# Local stack: `docker compose up -d` starts it, `docker compose down` stops it
+# (`docker compose down -v` also deletes the MLflow database and artifacts).
+#
+# Still to be added (one feature branch each, see README "Team & task split"):
+#   api, frontend, postgres, prometheus, grafana, evidently, traffic-simulator, prefect
+name: sp500-vol
+
+services:
+  mlflow:
+    build: ./docker/mlflow
+    image: sp500-vol/mlflow:local
+    ports:
+      - "5000:5000"
+    volumes:
+      - mlflow-data:/mlflow
+    healthcheck:
+      test:
+        - CMD
+        - python
+        - -c
+        - "import urllib.request; urllib.request.urlopen('http://localhost:5000/health')"
+      interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 20s
+    restart: unless-stopped
+
+volumes:
+  mlflow-data:
