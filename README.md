@@ -206,7 +206,7 @@ PRs with real comments.
 |---|---|---|---|
 | Shaoze Ying ([@yszgit](https://github.com/yszgit)) | Training | `feature/mlflow-training`, `feature/cd-ghcr` | repo + CI setup, data ingestion, features, training pipeline, MLflow tracking and registry; CD workflow that publishes images to GHCR |
 | Francois Charbonneau ([@f-x-sys](https://github.com/f-x-sys)) | Orchestration & traffic | `feature/training-flow`, `feature/traffic-simulator` | Prefect training flow and drift-triggered retraining; traffic simulator that replays unseen 2025 data with a drift switch |
-| Team 2 | Serving | `feature/model-api`, `feature/frontend` | FastAPI model API (loads `@champion`, `/predict` with input validation, `/metrics`, logs predictions to Postgres), Flask frontend, API integration test |
+| Renkai Zhu ([@Kevin04Bill](https://github.com/Kevin04Bill) | Serving | `feature/model-api`, `feature/frontend` | FastAPI model API (loads `@champion`, `/predict` with input validation, `/metrics`, logs predictions to Postgres), Flask frontend, API integration test |
 | Pengxin Wu ([@pengxin1020-lgtm](https://github.com/pengxin1020-lgtm)) | Monitoring | `feature/monitoring` | Postgres schema, Evidently drift/performance job, Prometheus, Grafana dashboards + alerts as code, drift-detection test, dashboard screenshots for this README |
 
 Hand-offs: Team 2 serves the model that the training pipeline registers, Team 3 monitors
