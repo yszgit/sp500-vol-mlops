@@ -206,8 +206,11 @@ PRs with real comments.
 |---|---|---|---|
 | Shaoze Ying ([@yszgit](https://github.com/yszgit)) | Training | `feature/mlflow-training`, `feature/cd-ghcr` | repo + CI setup, data ingestion, features, training pipeline, MLflow tracking and registry; CD workflow that publishes images to GHCR |
 | Francois Charbonneau ([@f-x-sys(https://github.com/f-x-sys)) | Orchestration & traffic | `feature/training-flow`, `feature/traffic-simulator` | Prefect training flow and drift-triggered retraining; traffic simulator that replays unseen 2025 data with a drift switch |
-| Renkai Zhu ([@Kevin04Bill](https://github.com/Kevin04Bill)) | CI/CD and testing | `feature/ci-cd` | Branch protection and basic unit tests |
+| Renkai Zhu ([@Kevin04Bill](https://github.com/Kevin04Bill)) |  Serving | `feature/model-api`, `feature/frontend` | FastAPI model API (loads `@champion`, `/predict` with input validation, `/metrics`, logs predictions to Postgres), Flask frontend, API integration test |
 | Team 3 | Monitoring | `feature/monitoring` | Postgres schema, Evidently drift/performance job, Prometheus, Grafana dashboards + alerts as code, drift-detection test, dashboard screenshots for this README |
+| Francois Charbonneau ([@f-x-sys](https://github.com/f-x-sys)) | Orchestration & traffic | `feature/training-flow`, `feature/traffic-simulator` | Prefect training flow and drift-triggered retraining; traffic simulator that replays unseen 2025 data with a drift switch |
+|  Renkai Zhu ([@Kevin04Bill](https://github.com/Kevin04Bill)) | Serving | `feature/model-api`, `feature/frontend` | FastAPI model API (loads `@champion`, `/predict` with input validation, `/metrics`, logs predictions to Postgres), Flask frontend, API integration test |
+| Pengxin Wu ([@pengxin1020-lgtm](https://github.com/pengxin1020-lgtm)) | Monitoring | `feature/monitoring` | Postgres schema, Evidently drift/performance job, Prometheus, Grafana dashboards + alerts as code, drift-detection test, dashboard screenshots for this README |
 
 Hand-offs: Team 2 serves the model that the training pipeline registers, Team 3 monitors
 the predictions Team 2 logs, and Team 3's drift alert triggers Team 1's retraining flow.
@@ -235,3 +238,5 @@ git push -u origin feature/<your-task>     # then open a PR on GitHub
 
 Screenshots of the Grafana dashboard under normal traffic and after drift is injected
 will go here once monitoring is in place.
+
+Once the next five trading days have passed and realized volatility is available, we plan to match each forecast to the actual value for the same stock and forecast window. We will track forecast errors over time to see whether model performance is deteriorating.
