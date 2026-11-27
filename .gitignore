@@ -1,0 +1,36 @@
+# --- Secrets (never commit) ---
+.env
+.pgpass
+
+# --- Data (CRSP data is licensed: never commit it) ---
+data/*
+!data/raw/
+data/raw/*
+!data/raw/.gitkeep
+*.parquet
+*.csv
+
+# --- MLflow local artifacts ---
+mlruns/
+mlartifacts/
+*.db
+
+# --- Python ---
+__pycache__/
+*.py[cod]
+*.egg-info/
+build/
+dist/
+.venv/
+venv/
+.pytest_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+# --- Notebooks / editors / OS ---
+.ipynb_checkpoints/
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
