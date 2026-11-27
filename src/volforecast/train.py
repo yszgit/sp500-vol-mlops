@@ -15,6 +15,7 @@ from __future__ import annotations
 
 import argparse
 import logging
+import re
 from pathlib import Path
 from typing import Any
 
@@ -42,6 +43,11 @@ PACKAGE_DIR = Path(__file__).resolve().parent
 
 
 # --- Pipeline steps -------------------------------------------------------------------
+def logged_model_name(run_name: str) -> str:
+    """MLflow logged-model names can't contain / : . % " ' -- replace them with '_'."""
+    return re.sub(r"[/:.%\"']", "_", run_name)
+
+
 def load_panel(data_path: str | None = None, synthetic: bool = False) -> pd.DataFrame:
     if synthetic:
         return make_synthetic_panel()
@@ -98,7 +104,7 @@ def train_candidate(
 
         info = mlflow.sklearn.log_model(
             sk_model=model,
-            name="model",
+            name=logged_model_name(name),  # e.g. "har_ols": easy to tell apart in the UI
             signature=infer_signature(x_val.head(200), val_pred[:200]),
             input_example=x_val.head(5),
             code_paths=[str(PACKAGE_DIR)],  # bundle volforecast so the API can load it

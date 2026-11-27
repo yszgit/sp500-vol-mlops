@@ -7,7 +7,13 @@ from mlflow.tracking import MlflowClient
 
 from volforecast import config
 from volforecast.models import CANDIDATES, SKOPS_TRUSTED_TYPES, build_model, features_for
-from volforecast.train import run_training
+from volforecast.train import logged_model_name, run_training
+
+
+def test_logged_model_names_are_valid_for_every_candidate():
+    assert logged_model_name("harx_ridge_a0.1") == "harx_ridge_a0_1"
+    for name, _, _ in CANDIDATES:
+        assert not set("/:.%\"'") & set(logged_model_name(name))
 
 
 @pytest.mark.parametrize("name,kind,params", CANDIDATES)
@@ -40,8 +46,13 @@ def test_training_logs_runs_and_registers_champion(tmp_path, monkeypatch):
     run = client.get_run(version.run_id)
     assert "val_qlike" in run.data.metrics and "test_qlike" in run.data.metrics
 
-    # The registered model loads through the generic pyfunc API (what the model API uses)
+    # Each logged model is named after its run, so they are distinguishable in the UI
     mlflow.set_tracking_uri(uri)
+    for result in out["results"]:
+        model_id = result["model_uri"].removeprefix("models:/")
+        assert mlflow.get_logged_model(model_id).name == logged_model_name(result["name"])
+
+    # The registered model loads through the generic pyfunc API (what the model API uses)
     model = mlflow.pyfunc.load_model(f"models:/{config.MODEL_NAME}@{config.CHAMPION_ALIAS}")
     example = model.input_example
     pred = np.asarray(model.predict(example))
